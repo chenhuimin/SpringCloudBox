@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloudbox.auth;
+package org.springcloudbox.common.config;
 
 
-import org.springcloudbox.core.launch.constant.AppConstant;
-import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * 用户认证服务器
+ * 公共封装包配置类
  *
  * @author Chill
  */
-@SpringCloudApplication
-@EnableFeignClients(AppConstant.BASE_PACKAGES)
-public class AuthApplication {
-
-	public static void main(String[] args) {
-    SpringApplication.run(AuthApplication.class, args);
-	}
+@Configuration
+@AllArgsConstructor
+public class BladeCommonConfiguration {
 
 }

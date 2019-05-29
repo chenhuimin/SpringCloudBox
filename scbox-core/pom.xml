@@ -18,6 +18,7 @@
     <module>scbox-core-log</module>
     <module>scbox-core-swagger</module>
     <module>scbox-core-launch</module>
+    <module>scbox-core-mybatis</module>
   </modules>
 
 

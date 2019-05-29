@@ -11,6 +11,8 @@
     <module>scbox-gateway</module>
     <module>scbox-core</module>
     <module>scbox-auth</module>
+    <module>scbox-common</module>
+    <module>scbox-service</module>
   </modules>
   <packaging>pom</packaging>
 

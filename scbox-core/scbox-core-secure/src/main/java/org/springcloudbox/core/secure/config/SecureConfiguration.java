@@ -20,8 +20,8 @@ import lombok.AllArgsConstructor;
 import org.springcloudbox.core.secure.aspect.AuthAspect;
 import org.springcloudbox.core.secure.interceptor.ClientInterceptor;
 import org.springcloudbox.core.secure.interceptor.SecureInterceptor;
-import org.springcloudbox.core.secure.props.BladeClientProperties;
-import org.springcloudbox.core.secure.props.BladeSecureProperties;
+import org.springcloudbox.core.secure.props.ScBoxClientProperties;
+import org.springcloudbox.core.secure.props.ScBoxSecureProperties;
 import org.springcloudbox.core.secure.provider.ClientDetailsServiceImpl;
 import org.springcloudbox.core.secure.provider.IClientDetailsService;
 import org.springcloudbox.core.secure.registry.SecureRegistry;
@@ -42,14 +42,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Order
 @Configuration
 @AllArgsConstructor
-@EnableConfigurationProperties({BladeSecureProperties.class, BladeClientProperties.class})
+@EnableConfigurationProperties({ScBoxSecureProperties.class, ScBoxClientProperties.class})
 public class SecureConfiguration implements WebMvcConfigurer {
 
 	private final SecureRegistry secureRegistry;
 
-	private final BladeSecureProperties secureProperties;
+	private final ScBoxSecureProperties secureProperties;
 
-	private final BladeClientProperties clientProperties;
+	private final ScBoxClientProperties clientProperties;
 
 	private final JdbcTemplate jdbcTemplate;
 

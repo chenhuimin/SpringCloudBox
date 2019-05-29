@@ -27,6 +27,12 @@
       <version>${scbox.core.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springcloudbox</groupId>
+      <artifactId>scbox-core-launch</artifactId>
+      <version>${scbox.core.version}</version>
+    </dependency>
+
     <!--Jdbc-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -37,6 +43,12 @@
           <groupId>org.apache.tomcat</groupId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.api.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

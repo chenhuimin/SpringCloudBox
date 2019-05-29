@@ -26,7 +26,7 @@ import java.io.Serializable;
  * @author Chill
  */
 @Data
-public class BladeUser implements Serializable {
+public class ScBoxUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**

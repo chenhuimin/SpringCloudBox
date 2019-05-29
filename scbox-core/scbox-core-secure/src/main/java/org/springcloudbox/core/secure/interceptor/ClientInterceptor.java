@@ -17,7 +17,7 @@ package org.springcloudbox.core.secure.interceptor;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springcloudbox.core.secure.BladeUser;
+import org.springcloudbox.core.secure.ScBoxUser;
 import org.springcloudbox.core.secure.utils.SecureUtil;
 import org.springcloudbox.core.tool.api.R;
 import org.springcloudbox.core.tool.api.ResultCode;
@@ -46,7 +46,7 @@ public class ClientInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		BladeUser user = SecureUtil.getUser();
+		ScBoxUser user = SecureUtil.getUser();
 		if (user != null && StringUtil.equals(clientId, SecureUtil.getClientIdFromHeader()) && StringUtil.equals(clientId, user.getClientId())) {
 			return true;
 		} else {

@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloudbox.core.secure.props;
+package org.springcloudbox.core.mp.base;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.util.ArrayList;
+import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
 
 /**
- * 客户端校验配置
+ * 基础业务接口
  *
+ * @param <T>
  * @author Chill
  */
-@Data
-@ConfigurationProperties("blade.secure")
-public class BladeClientProperties {
+public interface BaseService<T> extends IService<T> {
 
-	private final List<ClientSecure> client = new ArrayList<>();
+	/**
+	 * 逻辑删除
+	 *
+	 * @param ids id集合(逗号分隔)
+	 * @return
+	 */
+	boolean deleteLogic(@NotEmpty List<Integer> ids);
 
 }

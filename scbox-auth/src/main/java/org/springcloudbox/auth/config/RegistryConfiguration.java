@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloudbox.auth;
+package org.springcloudbox.auth.config;
 
 
-import org.springcloudbox.core.launch.constant.AppConstant;
-import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springcloudbox.core.secure.registry.SecureRegistry;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 用户认证服务器
+ * secure模块api放行配置
  *
  * @author Chill
  */
-@SpringCloudApplication
-@EnableFeignClients(AppConstant.BASE_PACKAGES)
-public class AuthApplication {
+@Configuration
+public class RegistryConfiguration implements WebMvcConfigurer {
 
-	public static void main(String[] args) {
-    SpringApplication.run(AuthApplication.class, args);
+	@Bean
+	public SecureRegistry secureRegistry() {
+		SecureRegistry secureRegistry = new SecureRegistry();
+		secureRegistry.excludePathPatterns("/token/**");
+		return secureRegistry;
 	}
 
 }

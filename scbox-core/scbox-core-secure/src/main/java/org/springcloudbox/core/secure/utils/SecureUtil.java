@@ -19,9 +19,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import javax.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import org.springcloudbox.core.launch.constant.TokenConstant;
-import org.springcloudbox.core.secure.BladeUser;
+import org.springcloudbox.core.secure.ScBoxUser;
 import org.springcloudbox.core.secure.constant.SecureConstant;
 import org.springcloudbox.core.secure.exception.SecureException;
 import org.springcloudbox.core.secure.provider.IClientDetails;
@@ -29,7 +30,6 @@ import org.springcloudbox.core.secure.provider.IClientDetailsService;
 import org.springcloudbox.core.tool.utils.*;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.*;
 
@@ -62,9 +62,9 @@ public class SecureUtil {
 	/**
 	 * 获取用户信息
 	 *
-	 * @return BladeUser
+	 * @return ScBoxUser
 	 */
-	public static BladeUser getUser() {
+	public static ScBoxUser getUser() {
 		HttpServletRequest request = WebUtil.getRequest();
 		if (request == null) {
 			return null;
@@ -78,16 +78,16 @@ public class SecureUtil {
 				request.setAttribute(BLADE_USER_REQUEST_ATTR, bladeUser);
 			}
 		}
-		return (BladeUser) bladeUser;
+		return (ScBoxUser) bladeUser;
 	}
 
 	/**
 	 * 获取用户信息
 	 *
 	 * @param request request
-	 * @return BladeUser
+	 * @return ScBoxUser
 	 */
-	public static BladeUser getUser(HttpServletRequest request) {
+	public static ScBoxUser getUser(HttpServletRequest request) {
 		Claims claims = getClaims(request);
 		if (claims == null) {
 			return null;
@@ -99,15 +99,15 @@ public class SecureUtil {
 		String account = Func.toStr(claims.get(SecureUtil.ACCOUNT));
 		String roleName = Func.toStr(claims.get(SecureUtil.ROLE_NAME));
 		String userName = Func.toStr(claims.get(SecureUtil.USER_NAME));
-		BladeUser bladeUser = new BladeUser();
-		bladeUser.setClientId(clientId);
-		bladeUser.setUserId(userId);
-		bladeUser.setTenantCode(tenantCode);
-		bladeUser.setAccount(account);
-		bladeUser.setRoleId(roleId);
-		bladeUser.setRoleName(roleName);
-		bladeUser.setUserName(userName);
-		return bladeUser;
+		ScBoxUser scBoxUser = new ScBoxUser();
+		scBoxUser.setClientId(clientId);
+		scBoxUser.setUserId(userId);
+		scBoxUser.setTenantCode(tenantCode);
+		scBoxUser.setAccount(account);
+		scBoxUser.setRoleId(roleId);
+		scBoxUser.setRoleName(roleName);
+		scBoxUser.setUserName(userName);
+		return scBoxUser;
 	}
 
 
@@ -117,7 +117,7 @@ public class SecureUtil {
 	 * @return userId
 	 */
 	public static Integer getUserId() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? -1 : user.getUserId();
 	}
 
@@ -128,7 +128,7 @@ public class SecureUtil {
 	 * @return userId
 	 */
 	public static Integer getUserId(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? -1 : user.getUserId();
 	}
 
@@ -138,7 +138,7 @@ public class SecureUtil {
 	 * @return userAccount
 	 */
 	public static String getUserAccount() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getAccount();
 	}
 
@@ -149,7 +149,7 @@ public class SecureUtil {
 	 * @return userAccount
 	 */
 	public static String getUserAccount(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? StringPool.EMPTY : user.getAccount();
 	}
 
@@ -159,7 +159,7 @@ public class SecureUtil {
 	 * @return userName
 	 */
 	public static String getUserName() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getUserName();
 	}
 
@@ -170,7 +170,7 @@ public class SecureUtil {
 	 * @return userName
 	 */
 	public static String getUserName(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? StringPool.EMPTY : user.getUserName();
 	}
 
@@ -180,7 +180,7 @@ public class SecureUtil {
 	 * @return userName
 	 */
 	public static String getUserRole() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getRoleName();
 	}
 
@@ -191,7 +191,7 @@ public class SecureUtil {
 	 * @return userName
 	 */
 	public static String getUserRole(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? StringPool.EMPTY : user.getRoleName();
 	}
 
@@ -201,7 +201,7 @@ public class SecureUtil {
 	 * @return tenantCode
 	 */
 	public static String getTenantCode() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getTenantCode();
 	}
 
@@ -212,7 +212,7 @@ public class SecureUtil {
 	 * @return tenantCode
 	 */
 	public static String getTenantCode(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? StringPool.EMPTY : user.getTenantCode();
 	}
 
@@ -222,7 +222,7 @@ public class SecureUtil {
 	 * @return tenantCode
 	 */
 	public static String getClientId() {
-		BladeUser user = getUser();
+		ScBoxUser user = getUser();
 		return (null == user) ? StringPool.EMPTY : user.getClientId();
 	}
 
@@ -233,7 +233,7 @@ public class SecureUtil {
 	 * @return tenantCode
 	 */
 	public static String getClientId(HttpServletRequest request) {
-		BladeUser user = getUser(request);
+		ScBoxUser user = getUser(request);
 		return (null == user) ? StringPool.EMPTY : user.getClientId();
 	}
 
