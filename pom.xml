@@ -13,6 +13,7 @@
     <module>scbox-auth</module>
     <module>scbox-common</module>
     <module>scbox-service</module>
+    <module>scbox-service-api</module>
   </modules>
   <packaging>pom</packaging>
 
